@@ -1,4 +1,4 @@
-package crypto;
+package crypto.key;
 
 public final class CaesarKey extends Key {
     

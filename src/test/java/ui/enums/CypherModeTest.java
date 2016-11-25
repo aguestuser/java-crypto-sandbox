@@ -1,9 +1,9 @@
-package crypto;
+package ui.enums;
 
 import org.junit.Test;
 
-import static crypto.CypherMode.DECRYPT;
-import static crypto.CypherMode.ENCRYPT;
+import static ui.enums.CypherMode.DECRYPT;
+import static ui.enums.CypherMode.ENCRYPT;
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;

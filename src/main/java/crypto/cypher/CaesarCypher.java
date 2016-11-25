@@ -1,4 +1,6 @@
-package crypto;
+package crypto.cypher;
+
+import crypto.key.CaesarKey;
 
 import java.util.stream.Collectors;
 

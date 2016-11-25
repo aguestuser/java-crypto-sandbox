@@ -1,4 +1,3 @@
-import crypto.CaesarCypher;
 import ui.Printer;
 import ui.UserInterface;
 

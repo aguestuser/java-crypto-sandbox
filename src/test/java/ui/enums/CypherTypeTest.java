@@ -1,12 +1,9 @@
-package crypto;
+package ui.enums;
 
 import org.junit.Test;
 
-import java.util.AbstractMap;
-import java.util.Arrays;
-
-import static crypto.CypherType.CAESAR;
-import static crypto.CypherType.NACL_SYMMETRIC;
+import static ui.enums.CypherType.CAESAR;
+import static ui.enums.CypherType.NACL_SYMMETRIC;
 import static org.junit.Assert.*;
 
 public class CypherTypeTest {

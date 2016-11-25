@@ -1,5 +1,7 @@
-package crypto;
+package crypto.cypher;
 
+import crypto.cypher.CaesarCypher;
+import crypto.key.CaesarKey;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

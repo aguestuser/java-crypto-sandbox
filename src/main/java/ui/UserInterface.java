@@ -1,16 +1,22 @@
 package ui;
 
-import crypto.*;
+import crypto.cypher.CaesarCypher;
+import crypto.cypher.Cypher;
+import ui.enums.CypherMode;
+import ui.enums.CypherType;
+import crypto.key.CaesarKey;
+import crypto.key.Key;
+import ui.enums.Continuation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static crypto.CypherMode.DECRYPT;
-import static crypto.CypherMode.ENCRYPT;
-import static crypto.CypherType.CAESAR;
-import static crypto.CypherType.NACL_SYMMETRIC;
-import static ui.Continuation.CONTINUE;
-import static ui.Continuation.QUIT;
+import static ui.enums.CypherMode.DECRYPT;
+import static ui.enums.CypherMode.ENCRYPT;
+import static ui.enums.CypherType.CAESAR;
+import static ui.enums.CypherType.NACL_SYMMETRIC;
+import static ui.enums.Continuation.CONTINUE;
+import static ui.enums.Continuation.QUIT;
 import static ui.UserInterfaceMessages.*;
 
 public class UserInterface {

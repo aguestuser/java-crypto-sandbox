@@ -1,11 +1,10 @@
 package ui;
 
-import crypto.CypherMode;
-import crypto.CypherType;
-import crypto.Key;
+import ui.enums.CypherType;
+import crypto.key.Key;
 
-import static crypto.CypherType.CAESAR;
-import static crypto.CypherType.NACL_SYMMETRIC;
+import static ui.enums.CypherType.CAESAR;
+import static ui.enums.CypherType.NACL_SYMMETRIC;
 
 class UserInterfaceMessages {
 

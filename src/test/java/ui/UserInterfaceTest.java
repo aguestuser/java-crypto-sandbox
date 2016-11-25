@@ -1,8 +1,8 @@
 package ui;
 
-import crypto.CaesarCypher;
-import crypto.CaesarKey;
-import crypto.Key;
+import crypto.cypher.CaesarCypher;
+import crypto.key.CaesarKey;
+import crypto.key.Key;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -11,15 +11,15 @@ import org.junit.runner.RunWith;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import static crypto.CypherMode.DECRYPT;
-import static crypto.CypherMode.ENCRYPT;
-import static crypto.CypherType.CAESAR;
-import static crypto.CypherType.NACL_SYMMETRIC;
+import static ui.enums.CypherMode.DECRYPT;
+import static ui.enums.CypherMode.ENCRYPT;
+import static ui.enums.CypherType.CAESAR;
+import static ui.enums.CypherType.NACL_SYMMETRIC;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static ui.Continuation.CONTINUE;
+import static ui.enums.Continuation.CONTINUE;
 import static ui.UserInterfaceMessages.*;
 
 @RunWith(Enclosed.class)
