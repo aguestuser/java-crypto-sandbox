@@ -11,7 +11,7 @@ This is a sandbox repo for experimenting with various crypto cyphers for use in 
   * or.. execute `Synchronize` command in IntelliJ (`C-M-Y` in emacs keybinding)
 
 * to run app: 
-  * run `gradle run` from CLI
+  * run `gradle run -q` from CLI (`q` flag suppresses annoying gradle printouts)
   * or... execute `Run` command in IntelliJ (`C-Shift-F10` in emacs keybinding)from `com.example.App`, will bring up CLI
 
 * to run tests:
