@@ -1,6 +1,6 @@
-package crypto.util;
+package crypto;
 
-import crypto.util.ByteGenerator;
+import crypto.ByteGenerator;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

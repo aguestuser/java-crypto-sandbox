@@ -1,4 +1,4 @@
-package crypto.cypher;
+package crypto;
 
 import org.abstractj.kalium.crypto.SecretBox;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static support.CryptoFixtures.*;
 import static support.CryptoFixtures.SecretBox.*;
 
-public class SecretBoxCypherTest {
+public class SymmetricCypherTest {
 
     /**************  sanity checks *******************/
 

@@ -1,4 +1,4 @@
-package crypto.util;
+package crypto;
 
 import org.abstractj.kalium.crypto.Random;
 

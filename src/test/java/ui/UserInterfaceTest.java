@@ -1,6 +1,6 @@
 package ui;
 
-import crypto.util.ByteGenerator;
+import crypto.ByteGenerator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;

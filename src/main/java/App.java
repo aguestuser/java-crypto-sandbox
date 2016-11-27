@@ -1,4 +1,4 @@
-import crypto.util.ByteGenerator;
+import crypto.ByteGenerator;
 import ui.Printer;
 import ui.UserInterface;
 

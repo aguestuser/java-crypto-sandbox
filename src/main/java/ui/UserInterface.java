@@ -1,7 +1,7 @@
 package ui;
 
-import crypto.util.ByteGenerator;
-import crypto.cypher.Cypher;
+import crypto.ByteGenerator;
+import crypto.Cypher;
 import org.abstractj.kalium.crypto.SecretBox;
 import ui.enums.CypherMode;
 import ui.enums.CypherType;
