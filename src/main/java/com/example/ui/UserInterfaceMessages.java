@@ -1,9 +1,9 @@
-package ui;
+package com.example.ui;
 
-import ui.enums.CypherType;
+import com.example.ui.enums.CypherType;
 
-import static ui.enums.CypherType.ASYMMETRIC;
-import static ui.enums.CypherType.SYMMETRIC;
+import static com.example.ui.enums.CypherType.ASYMMETRIC;
+import static com.example.ui.enums.CypherType.SYMMETRIC;
 
 class UserInterfaceMessages {
 

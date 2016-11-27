@@ -1,4 +1,4 @@
-package ui.enums;
+package com.example.ui.enums;
 
 public enum CypherType {
     SYMMETRIC("Symmetric Cypher", 1),

@@ -1,9 +1,9 @@
-package ui.enums;
+package com.example.ui.enums;
 
 import org.junit.Test;
 
-import static ui.enums.CypherType.ASYMMETRIC;
-import static ui.enums.CypherType.SYMMETRIC;
+import static com.example.ui.enums.CypherType.ASYMMETRIC;
+import static com.example.ui.enums.CypherType.SYMMETRIC;
 import static org.junit.Assert.*;
 
 public class CypherTypeTest {

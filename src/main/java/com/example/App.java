@@ -1,6 +1,8 @@
-import crypto.ByteGenerator;
-import ui.Printer;
-import ui.UserInterface;
+package com.example;
+
+import com.example.crypto.ByteGenerator;
+import com.example.ui.Printer;
+import com.example.ui.UserInterface;
 
 import java.io.BufferedReader;
 import java.io.IOException;

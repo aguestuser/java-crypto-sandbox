@@ -1,9 +1,5 @@
 package support;
 
-import org.abstractj.kalium.crypto.Random;
-
-import static org.abstractj.kalium.NaCl.Sodium.CRYPTO_SECRETBOX_XSALSA20POLY1305_KEYBYTES;
-import static org.abstractj.kalium.NaCl.Sodium.CRYPTO_SECRETBOX_XSALSA20POLY1305_NONCEBYTES;
 import static org.abstractj.kalium.encoders.Encoder.HEX;
 
 public class CryptoFixtures {

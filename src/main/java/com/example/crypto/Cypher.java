@@ -1,4 +1,4 @@
-package crypto;
+package com.example.crypto;
 
 public interface Cypher {
     EncryptedMessage encrypt(String key, String cleartext);

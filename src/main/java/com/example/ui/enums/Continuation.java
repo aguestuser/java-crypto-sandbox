@@ -1,4 +1,4 @@
-package ui.enums;
+package com.example.ui.enums;
 
 public enum Continuation {
     MAKE_KEY("make new key", "k"),

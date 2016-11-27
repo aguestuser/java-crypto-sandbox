@@ -1,8 +1,8 @@
-package ui;
+package com.example.ui;
 
-import crypto.ByteGenerator;
-import crypto.EncryptedMessage;
-import crypto.SymmetricCypher;
+import com.example.crypto.ByteGenerator;
+import com.example.crypto.EncryptedMessage;
+import com.example.crypto.SymmetricCypher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -17,11 +17,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.Mockito.*;
 import static support.CryptoFixtures.SecretBox.*;
-import static ui.UserInterface.State.*;
-import static ui.UserInterfaceMessages.*;
-import static ui.enums.CypherMode.DECRYPT;
-import static ui.enums.CypherMode.ENCRYPT;
-import static ui.enums.CypherType.SYMMETRIC;
+import static com.example.ui.UserInterface.State.*;
+import static com.example.ui.UserInterfaceMessages.*;
+import static com.example.ui.enums.CypherMode.DECRYPT;
+import static com.example.ui.enums.CypherMode.ENCRYPT;
+import static com.example.ui.enums.CypherType.SYMMETRIC;
 
 @RunWith(Enclosed.class)
 

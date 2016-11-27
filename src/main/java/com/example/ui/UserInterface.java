@@ -1,25 +1,29 @@
-package ui;
+package com.example.ui;
 
-import crypto.ByteGenerator;
-import crypto.Cypher;
-import crypto.EncryptedMessage;
-import crypto.SymmetricCypher;
-import ui.enums.CypherMode;
-import ui.enums.CypherType;
+
+import com.example.crypto.ByteGenerator;
+import com.example.crypto.Cypher;
+import com.example.crypto.EncryptedMessage;
+import com.example.crypto.SymmetricCypher;
+import com.example.ui.enums.CypherMode;
+import com.example.ui.enums.CypherType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static com.example.ui.UserInterfaceMessages.CYPHER_MODE_PROMPT;
+import static com.example.ui.UserInterfaceMessages.MAKE_NEW_KEY_PROMPT;
+import static com.example.ui.UserInterfaceMessages.secretKeyNotificationOf;
 import static org.abstractj.kalium.encoders.Encoder.HEX;
-import static ui.UserInterface.State.DECRYPTING;
-import static ui.UserInterface.State.DONE;
-import static ui.UserInterface.State.ENCRYPTING;
-import static ui.enums.Continuation.*;
-import static ui.enums.Continuation.DECRYPT_MESSAGE;
-import static ui.enums.CypherMode.DECRYPT;
-import static ui.enums.CypherMode.ENCRYPT;
-import static ui.enums.CypherType.SYMMETRIC;
-import static ui.UserInterfaceMessages.*;
+import static com.example.ui.UserInterface.State.DECRYPTING;
+import static com.example.ui.UserInterface.State.DONE;
+import static com.example.ui.UserInterface.State.ENCRYPTING;
+import static com.example.ui.enums.Continuation.*;
+import static com.example.ui.enums.Continuation.DECRYPT_MESSAGE;
+import static com.example.ui.enums.CypherMode.DECRYPT;
+import static com.example.ui.enums.CypherMode.ENCRYPT;
+import static com.example.ui.enums.CypherType.SYMMETRIC;
+import static com.example.ui.UserInterfaceMessages.*;
 
 public class UserInterface {
     

@@ -1,4 +1,4 @@
-package crypto;
+package com.example.crypto;
 
 import org.junit.Test;
 
