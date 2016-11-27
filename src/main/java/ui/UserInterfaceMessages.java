@@ -69,7 +69,7 @@ class UserInterfaceMessages {
     static final String DECRYPT_WITH_SECRET_KEY_PROMPT = "\nInput secret key to decrypt message with...\n";
 
     static String decryptionNotificationOf(String clearText) {
-        return String.format("\nYour decrypted message is: \n\n%s\n\n", clearText);
+        return String.format("\nYour decrypted message is: \n\n%s\n", clearText);
     }
 
     // CONTINUATION messages
@@ -78,7 +78,7 @@ class UserInterfaceMessages {
         "[k] make new key\n" +
         "[e] encrypt message\n" +
         "[d] decrypt message\n" +
-        "[q] quit\n\n";
+        "[q] quit\n";
 
     static final String CONTINUATION_PROMPT = "\nWhat would you like to do next?\n" +
         CONTINUATION_CHOICES;

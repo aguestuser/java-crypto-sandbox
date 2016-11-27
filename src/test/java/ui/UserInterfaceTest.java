@@ -1,6 +1,8 @@
 package ui;
 
 import crypto.ByteGenerator;
+import crypto.EncryptedMessage;
+import crypto.SymmetricCypher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -22,21 +24,25 @@ import static ui.enums.CypherMode.ENCRYPT;
 import static ui.enums.CypherType.SYMMETRIC;
 
 @RunWith(Enclosed.class)
+
 public class UserInterfaceTest {
 
     private static class TestEnvironment{
 
         BufferedReader reader;
         Printer printer;
+        ByteGenerator byteGenerator;
         UserInterface userInterface;
 
         TestEnvironment(){
-            ByteGenerator byteGenerator = mock(ByteGenerator.class);
-            when(byteGenerator.generateSecretKeyBytes()).thenReturn(SECRET_KEY_BYTES);
-            when(byteGenerator.generateNonceBytes()).thenReturn(NONCE_BYTES);
 
             this.reader = mock(BufferedReader.class);
             this.printer = mock(Printer.class);
+            this.byteGenerator = mock(ByteGenerator.class);
+
+            when(byteGenerator.generateSecretKeyBytes()).thenReturn(SECRET_KEY_BYTES);
+            when(byteGenerator.generateNonceBytes()).thenReturn(NONCE_BYTES);
+
             this.userInterface = new UserInterface(reader, printer, byteGenerator);
         }
     }
@@ -160,7 +166,6 @@ public class UserInterfaceTest {
 
         }
 
-
         @Test
         public void test_getCypherType_errorHandling() throws IOException {
 
@@ -204,6 +209,37 @@ public class UserInterfaceTest {
         }
 
         @Test
+        public void test_encryptClearText() throws IOException {
+
+            env.userInterface.cypher = new SymmetricCypher(env.byteGenerator);
+
+            when(env.reader.readLine())
+                .thenReturn(SECRET_KEY_HEX)
+                .thenReturn(CLEARTEXT);
+
+            assertThat(
+                env.userInterface.encryptClearText(),
+                is(equalTo(new EncryptedMessage(CYPHERTEXT_HEX, NONCE_HEX)))
+            );
+        }
+
+        @Test
+        public void test_decryptCypherText() throws IOException {
+
+            env.userInterface.cypher = new SymmetricCypher(env.byteGenerator);
+
+            when(env.reader.readLine())
+                .thenReturn(SECRET_KEY_HEX)
+                .thenReturn(CYPHERTEXT_HEX)
+                .thenReturn(NONCE_HEX);
+
+            assertThat(
+                env.userInterface.decryptCypherText(),
+                is(equalTo(CLEARTEXT))
+            );
+        }
+
+        @Test
         public void test_getContinuation() throws IOException {
 
             when(env.reader.readLine()).thenReturn("k");
@@ -233,6 +269,18 @@ public class UserInterfaceTest {
                 env.userInterface.getContinuation(""),
                 is(equalTo(DONE))
             );
+        }
+
+        @Test
+        public void test_getContinuation_errorHandling() throws IOException {
+
+            when(env.reader.readLine())
+                .thenReturn("MANIAC!")
+                .thenReturn("q");
+
+            env.userInterface.getContinuation("");
+
+            verify(env.printer).println(CONTINUATION_REPROMPT);
         }
     }
 }
