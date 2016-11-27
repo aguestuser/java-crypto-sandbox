@@ -1,3 +1,4 @@
+import crypto.util.ByteGenerator;
 import ui.Printer;
 import ui.UserInterface;
 
@@ -11,7 +12,8 @@ public class App {
         
         UserInterface ui = new UserInterface(
             new BufferedReader(new InputStreamReader(System.in)),
-            new Printer());
+            new Printer(),
+            ByteGenerator.INSTANCE);
         ui.run();
     }
 }

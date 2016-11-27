@@ -1,109 +1,98 @@
 package ui;
 
-import crypto.cypher.CaesarCypher;
+import crypto.util.ByteGenerator;
 import crypto.cypher.Cypher;
+import org.abstractj.kalium.crypto.SecretBox;
 import ui.enums.CypherMode;
 import ui.enums.CypherType;
-import crypto.key.CaesarKey;
-import crypto.key.Key;
-import ui.enums.Continuation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import static org.abstractj.kalium.encoders.Encoder.HEX;
+import static ui.UserInterface.State.DECRYPTING;
+import static ui.UserInterface.State.DONE;
+import static ui.UserInterface.State.ENCRYPTING;
+import static ui.enums.Continuation.*;
+import static ui.enums.Continuation.DECRYPT_MESSAGE;
 import static ui.enums.CypherMode.DECRYPT;
 import static ui.enums.CypherMode.ENCRYPT;
-import static ui.enums.CypherType.CAESAR;
-import static ui.enums.CypherType.NACL_SYMMETRIC;
-import static ui.enums.Continuation.CONTINUE;
-import static ui.enums.Continuation.QUIT;
+import static ui.enums.CypherType.SYMMETRIC;
 import static ui.UserInterfaceMessages.*;
 
 public class UserInterface {
     
     private static final String EXIT = "x";
     
-    private enum State {
-        GETTING_CYPHER,
+    enum State {
         GETTING_KEY,
         GETTING_MODE,
-        GETTING_MESSAGE,
+        GETTING_CYPHER,
+        ENCRYPTING,
+        DECRYPTING,
         GETTING_CONTINUATION,
         DONE
     }
     
     private BufferedReader reader;
     private Printer printer;
+    private ByteGenerator byteGenerator;
     private State state;
     private CypherMode cypherMode;
-    
-    // package-private
-    CypherType cypherType;
-    Key key;
-    Cypher cypher;
-    
-    public UserInterface(BufferedReader reader, Printer printer){
+    private String key;
+    private CypherType cypherType;
+    private Cypher cypher;
+
+    public UserInterface(
+        BufferedReader reader,
+        Printer printer,
+        ByteGenerator byteGenerator){
+
         this.reader = reader;
         this.printer = printer;
-        this.state = State.GETTING_CYPHER;
+        this.byteGenerator = byteGenerator;
+        this.state = State.GETTING_KEY;
     }
     
     public UserInterface run() throws IOException {
         
         switch (this.state) {
-            
-            case GETTING_CYPHER:
-                
-                this.cypherType = getCypherType(CYPHER_TYPE_PROMPT);
-                printer.println(cypherTypeNotificationOf(cypherType.str));
-    
-                this.state = State.GETTING_KEY;
-                return this.run();
 
             case GETTING_KEY:
 
-                this.key = getCaesarKey(CAESAR_KEY_PROMPT);
-                printer.println(keyNotificationOf(cypherType, key));
-                this.cypher = getCypher();
-    
+                if (shouldGenerateKey(MAKE_NEW_KEY_PROMPT)){
+                    this.key = HEX.encode(this.byteGenerator.generateSecretKeyBytes());
+                    printer.println(secretKeyNotificationOf(key));
+                }
+
                 this.state = State.GETTING_MODE;
                 return this.run();
-            
+
             case GETTING_MODE:
-                
                 this.cypherMode = getCypherMode(CYPHER_MODE_PROMPT);
-                
-                this.state = State.GETTING_MESSAGE;
+                this.state = State.GETTING_CYPHER;
                 return this.run();
-            
-            case GETTING_MESSAGE:
-                
-                switch(this.cypherMode) {
-                    case ENCRYPT:
-                        String cypherText = getCypherText();
-                        printer.println(encryptionNotificationOf(cypherText));
-                        break;
-                    case DECRYPT:
-                        String clearText = getClearText();
-                        printer.println(decryptionNotificationOf(clearText));
-                        break;
-                }
-                
+
+            case GETTING_CYPHER:
+                this.cypherType = SYMMETRIC; // hard code for now
+                printer.println(cypherTypeNotificationOf(cypherType.str));
+                this.state = this.cypherMode == ENCRYPT
+                    ? ENCRYPTING
+                    : DECRYPTING;
+                return this.run();
+
+            case ENCRYPTING:
+                encryptClearText();
                 this.state = State.GETTING_CONTINUATION;
                 return this.run();
-                
+
+            case DECRYPTING:
+                decryptCypherText();
+                this.state = State.GETTING_CONTINUATION;
+                return this.run();
+
             case GETTING_CONTINUATION:
-
-                Continuation continuation = getContinuation(CONTINUATION_PROMPT);
-
-                switch (continuation){
-                    case CONTINUE:
-                        this.state = State.GETTING_MODE;
-                        break;
-                    case QUIT:
-                        this.state = State.DONE;
-                        break;
-                }
+                this.state = getContinuation(CONTINUATION_PROMPT);
                 return this.run();
                 
             default:
@@ -111,7 +100,19 @@ public class UserInterface {
                 return this;
         }
     }
-    
+
+    private boolean shouldGenerateKey(String prompt) throws IOException {
+        String input = promptAndGet(prompt);
+        switch(input){
+            case "y":
+                return true;
+            case "n":
+                return false;
+            default:
+                return shouldGenerateKey(MAKE_NEW_KEY_REPROMPT);
+        }
+    }
+
     
     CypherType getCypherType(String prompt) throws NumberFormatException, IOException {
 
@@ -124,32 +125,13 @@ public class UserInterface {
             return getCypherType(CYPHER_TYPE_REPROMPT);
         }
         
-        if (cypherNum == CAESAR.num) { return CAESAR; }
-        else if (cypherNum == NACL_SYMMETRIC.num) { return NACL_SYMMETRIC; }
-        else { return getCypherType(CYPHER_TYPE_REPROMPT); }
-    }
-    
-    Key getCaesarKey(String prompt) throws NumberFormatException, IOException {
-
-        String input = promptAndGet(prompt);
-        
-        try {
-            return new CaesarKey(Integer.parseInt(input));
-        } catch (NumberFormatException nfe) {
-            return getCaesarKey(CAESAR_KEY_REPROMPT);
+        if (cypherNum == SYMMETRIC.num) {
+            return SYMMETRIC;
+        } else {
+            return getCypherType(CYPHER_TYPE_REPROMPT);
         }
     }
-    
-    Cypher getCypher(){
 
-        switch(this.cypherType) {
-            case CAESAR:
-                return new CaesarCypher((CaesarKey) this.key);
-            default:
-                return new CaesarCypher((CaesarKey) this.key);
-        }
-    }
-    
     CypherMode getCypherMode(String prompt) throws IOException {
 
         String input = promptAndGet(prompt);
@@ -163,30 +145,43 @@ public class UserInterface {
         }
     }
 
-    String getCypherText() throws IOException {
-        String input = promptAndGet(ENCRYPTION_PROMPT);
-        return this.cypher.encrypt(input);
+    private void encryptClearText() throws IOException {
+        String key = promptAndGet(ENCRYPT_TO_SECRET_KEY_PROMPT);
+        String cleartext = promptAndGet(ENCRYPT_CLEARTEXT_PROMPT);
+        String nonce = HEX.encode(this.byteGenerator.generateNonceBytes());
+
+        SecretBox box = new SecretBox(key, HEX);
+        byte[] cypherTextBytes = box.encrypt(HEX.decode(nonce), cleartext.getBytes());
+        printer.println(encryptionNotificationOf(HEX.encode(cypherTextBytes), nonce));
     }
     
-    String getClearText() throws IOException {
-        String input = promptAndGet(DECRYPTION_PROMPT);
-        return this.cypher.decrypt(input);
+    private void decryptCypherText() throws IOException {
+        String key = promptAndGet(DECRYPT_WITH_SECRET_KEY_PROMPT);
+        String cleartext = promptAndGet(DECRYPT_CYPHERTEXT_PROMPT);
+        String nonce = promptAndGet(DECRYPT_NONCE_PROMPT);
+
+        SecretBox box = new SecretBox(key, HEX);
+        byte[] cleartextBytes = box.decrypt(HEX.decode(nonce), HEX.decode(cleartext));
+        printer.println(decryptionNotificationOf(new String (cleartextBytes)));
     }
     
-    Continuation getContinuation(String prompt) throws IOException {
+    State getContinuation(String prompt) throws IOException {
 
         String input = promptAndGet(prompt);
-        
-        if (input.equals(CONTINUE.flag)){
-            return CONTINUE;
+
+        if (input.equals(MAKE_KEY.flag)){
+            return State.GETTING_KEY;
+        } else if (input.equals(ENCRYPT_MESSAGE.flag)) {
+            return ENCRYPTING;
+        } else if (input.equals(DECRYPT_MESSAGE.flag)) {
+            return DECRYPTING;
         } else if (input.equals(QUIT.flag)) {
-            return QUIT;
+            return DONE;
         } else {
             return getContinuation(CONTINUATION_REPROMPT);
         }
     }
-    
-    
+
     private String promptAndGet(String prompt) throws IOException {
         printer.println(prompt);
         return this.reader.readLine();

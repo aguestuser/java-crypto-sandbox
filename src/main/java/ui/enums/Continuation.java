@@ -1,7 +1,9 @@
 package ui.enums;
 
 public enum Continuation {
-    CONTINUE("continue", "c"),
+    MAKE_KEY("make new key", "k"),
+    ENCRYPT_MESSAGE("encrypt message", "e"),
+    DECRYPT_MESSAGE("decrypt message", "d"),
     QUIT("quit", "q");
     
     public final String name;

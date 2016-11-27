@@ -2,37 +2,37 @@ package ui.enums;
 
 import org.junit.Test;
 
-import static ui.enums.CypherType.CAESAR;
-import static ui.enums.CypherType.NACL_SYMMETRIC;
+import static ui.enums.CypherType.ASYMMETRIC;
+import static ui.enums.CypherType.SYMMETRIC;
 import static org.junit.Assert.*;
 
 public class CypherTypeTest {
     
     @Test
-    public void test_CAESAR_enum(){
+    public void test_SYMMETRIC_enum(){
     
         assertEquals("it wraps a string",
-            "Caesar Cypher",
-            CAESAR.str
+            "Symmetric Cypher",
+            SYMMETRIC.str
         );
     
-        assertEquals("it wraps a string for CAESAR type",
+        assertEquals("it wraps a number",
             1,
-            CAESAR.num
+            SYMMETRIC.num
         );
     }
-    
+
     @Test
-    public void test_NACL_SYMMETRIC_enum(){
-    
+    public void test_ASYMMETRIC_enum(){
+
         assertEquals("it wraps a string",
-            "NaCl Symmetric",
-            NACL_SYMMETRIC.str
+            "Asymmetric Cypher",
+            ASYMMETRIC.str
         );
-    
-        assertEquals("it wraps a string for CAESAR type",
+
+        assertEquals("it wraps a number",
             2,
-            NACL_SYMMETRIC.num
+            ASYMMETRIC.num
         );
     }
 }
