@@ -1,5 +1,7 @@
-package com.example.crypto;
+package com.example.crypto.cypher;
 
+import com.example.crypto.message.EncryptedMessage;
+import com.example.crypto.util.ByteGenerator;
 import org.abstractj.kalium.crypto.SealedBox;
 
 import static org.abstractj.kalium.encoders.Encoder.HEX;
@@ -15,7 +17,8 @@ public class AsymmetricCypher implements Cypher {
         final SealedBox box = new SealedBox(HEX.decode(publicKeyHex));
         final byte[] cypherTextBytes = box.encrypt(cleartext.getBytes());
 
-        return new EncryptedMessage(HEX.encode(cypherTextBytes),"");
+        return new EncryptedMessage(HEX.encode(cypherTextBytes)) {
+        };
     }
 
     @Override
@@ -23,7 +26,8 @@ public class AsymmetricCypher implements Cypher {
         final byte[] privateKeyBytes = HEX.decode(privateKeyHex);
         final byte[] publicKeyBytes = ByteGenerator.generatePublicKeyBytes(privateKeyBytes);
         final SealedBox box = new SealedBox(publicKeyBytes, privateKeyBytes);
+        final byte[] cyphertextBytes = HEX.decode(message.cyphertext);
 
-        return new String(box.decrypt(HEX.decode(message.cyphertext)));
+        return new String(box.decrypt(cyphertextBytes));
     }
 }

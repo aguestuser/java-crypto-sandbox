@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.crypto.ByteGenerator;
+import com.example.crypto.util.ByteGenerator;
 import com.example.ui.Printer;
 import com.example.ui.UserInterface;
 

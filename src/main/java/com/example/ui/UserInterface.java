@@ -1,10 +1,11 @@
 package com.example.ui;
 
 
-import com.example.crypto.ByteGenerator;
-import com.example.crypto.Cypher;
-import com.example.crypto.EncryptedMessage;
-import com.example.crypto.SymmetricCypher;
+import com.example.crypto.message.EncryptedMessage;
+import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.cypher.Cypher;
+import com.example.crypto.message.EncryptedMessageWithNonce;
+import com.example.crypto.cypher.SymmetricCypher;
 import com.example.ui.enums.CypherMode;
 import com.example.ui.enums.CypherType;
 
@@ -88,7 +89,7 @@ public class UserInterface {
 
             case ENCRYPTING:
 
-                EncryptedMessage message = encryptClearText();
+                EncryptedMessageWithNonce message = (EncryptedMessageWithNonce)encryptClearText();
                 printer.println(encryptionNotificationOf(message.cyphertext, message.nonce));
 
                 this.state = State.GETTING_CONTINUATION;
@@ -174,7 +175,7 @@ public class UserInterface {
         String cyphertext = promptAndGet(DECRYPT_CYPHERTEXT_PROMPT);
         String nonce = promptAndGet(DECRYPT_NONCE_PROMPT);
 
-        return cypher.decrypt(key, new EncryptedMessage(cyphertext, nonce));
+        return cypher.decrypt(key, new EncryptedMessageWithNonce(cyphertext, nonce));
     }
     
     State getContinuation(String prompt) throws IOException {

@@ -1,5 +1,7 @@
-package com.example.crypto;
+package com.example.crypto.cypher;
 
+import com.example.crypto.message.EncryptedMessageWithNonce;
+import com.example.crypto.util.ByteGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +31,7 @@ public class SymmetricCypherTest {
 
         assertThat(
             cypher.encrypt(SECRET_KEY_HEX, CLEARTEXT),
-            is(equalTo(new EncryptedMessage(CYPHERTEXT_HEX, NONCE_HEX)))
+            is(equalTo(new EncryptedMessageWithNonce(CYPHERTEXT_HEX, NONCE_HEX)))
         );
     }
 
@@ -37,7 +39,7 @@ public class SymmetricCypherTest {
     public void test_decrypt(){
 
         assertThat(
-            cypher.decrypt(SECRET_KEY_HEX, new EncryptedMessage(CYPHERTEXT_HEX, NONCE_HEX)),
+            cypher.decrypt(SECRET_KEY_HEX, new EncryptedMessageWithNonce(CYPHERTEXT_HEX, NONCE_HEX)),
             is(equalTo(CLEARTEXT))
         );
     }

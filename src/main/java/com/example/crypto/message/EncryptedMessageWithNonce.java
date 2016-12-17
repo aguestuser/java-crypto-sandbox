@@ -1,13 +1,12 @@
-package com.example.crypto;
+package com.example.crypto.message;
 
 
-public class EncryptedMessage {
+public class EncryptedMessageWithNonce extends EncryptedMessage {
 
-    public final String cyphertext;
     public final String nonce;
 
-    public EncryptedMessage(String cyphertext, String nonce){
-        this.cyphertext = cyphertext;
+    public EncryptedMessageWithNonce(String cyphertext, String nonce){
+        super(cyphertext);
         this.nonce = nonce;
     }
 
@@ -16,7 +15,7 @@ public class EncryptedMessage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EncryptedMessage msg = (EncryptedMessage) o;
+        EncryptedMessageWithNonce msg = (EncryptedMessageWithNonce) o;
         return cyphertext.equals(msg.cyphertext) && nonce.equals(msg.nonce);
     }
 

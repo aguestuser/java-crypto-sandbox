@@ -1,4 +1,4 @@
-package com.example.crypto;
+package com.example.crypto.util;
 
 import org.abstractj.kalium.crypto.Random;
 import org.abstractj.kalium.keys.KeyPair;
@@ -21,11 +21,11 @@ public class ByteGenerator {
         return new Random().randomBytes(CRYPTO_SECRETBOX_XSALSA20POLY1305_NONCEBYTES);
     }
 
-    static byte[] generatePublicKeyBytes(byte[] privateKeyBytes){
+    public static byte[] generatePublicKeyBytes(byte[] privateKeyBytes){
         return new KeyPair(privateKeyBytes).getPublicKey().toBytes();
     }
 
-    static String generatePublicKeyHex(byte[] privateKeyBytes){
+    public static String generatePublicKeyHex(byte[] privateKeyBytes){
         return HEX.encode(generatePublicKeyBytes(privateKeyBytes));
     }
 }

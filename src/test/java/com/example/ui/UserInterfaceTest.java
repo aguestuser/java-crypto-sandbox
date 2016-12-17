@@ -1,8 +1,8 @@
 package com.example.ui;
 
-import com.example.crypto.ByteGenerator;
-import com.example.crypto.EncryptedMessage;
-import com.example.crypto.SymmetricCypher;
+import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.message.EncryptedMessageWithNonce;
+import com.example.crypto.cypher.SymmetricCypher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -219,7 +219,7 @@ public class UserInterfaceTest {
 
             assertThat(
                 env.userInterface.encryptClearText(),
-                is(equalTo(new EncryptedMessage(CYPHERTEXT_HEX, NONCE_HEX)))
+                is(equalTo(new EncryptedMessageWithNonce(CYPHERTEXT_HEX, NONCE_HEX)))
             );
         }
 
