@@ -23,9 +23,9 @@ public class SymmetricCypher implements Cypher {
     }
 
     @Override
-    public String decrypt(String key, EncryptedMessage message) {
+    public String decrypt(String keyHex, EncryptedMessage message) {
 
-        final SecretBox box = new SecretBox(HEX.decode(key));
+        final SecretBox box = new SecretBox(HEX.decode(keyHex));
         final byte[] cyphertext = HEX.decode(message.cyphertext);
         final byte[] nonce = HEX.decode(message.nonce);
 
