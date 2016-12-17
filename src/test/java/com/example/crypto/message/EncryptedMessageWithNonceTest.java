@@ -20,10 +20,11 @@ public class EncryptedMessageWithNonceTest {
     @Test
     public void test_equalityComparison(){
         EncryptedMessageWithNonce message1 = new EncryptedMessageWithNonce("foo", "bar");
-
         EncryptedMessageWithNonce message2 = new EncryptedMessageWithNonce("foo", "bar");
+        EncryptedMessageWithNonce message3 = new EncryptedMessageWithNonce("foo", "baz");
 
         assertEquals(message1, message2);
+        assertNotEquals(message1, message3);
     }
 
 }
