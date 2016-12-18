@@ -1,6 +1,5 @@
-package com.example.crypto.util;
+package com.example.crypto.generator;
 
-import com.example.crypto.util.ByteGenerator;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

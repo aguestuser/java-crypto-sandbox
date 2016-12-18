@@ -19,6 +19,8 @@ public class CryptoFixtures {
         
         public static final String CYPHERTEXT_HEX = "1b294418500a75e29daebfe2764e569858fb08361b";
         public static final byte[] CYPHERTEXT_BYTES = HEX.decode(CYPHERTEXT_HEX);
+
+        public static final String TIMESTAMP = "2016-12-17T22:49:00.587Z";
     
     }
     

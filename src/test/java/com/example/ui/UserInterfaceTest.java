@@ -1,6 +1,6 @@
 package com.example.ui;
 
-import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.generator.ByteGenerator;
 import com.example.crypto.message.EncryptedMessageWithNonce;
 import com.example.crypto.cypher.SymmetricCypher;
 import org.junit.Before;
@@ -60,7 +60,7 @@ public class UserInterfaceTest {
         public void test_symmetricEncryption() throws IOException {
 
             when(env.reader.readLine())
-                .thenReturn("y") // key gen
+                .thenReturn("y") // key generator
                 .thenReturn("e") // encrypt choice
                 .thenReturn(SECRET_KEY_HEX) // secret key input
                 .thenReturn(CLEARTEXT) // message input
@@ -87,7 +87,7 @@ public class UserInterfaceTest {
         public void test_symmetricDecryption() throws IOException {
 
             when(env.reader.readLine())
-                .thenReturn("y") // key gen
+                .thenReturn("y") // key generator
                 .thenReturn("d") // encrypt choice
                 .thenReturn(SECRET_KEY_HEX) // secret key input
                 .thenReturn(CYPHERTEXT_HEX) // message input
@@ -117,7 +117,7 @@ public class UserInterfaceTest {
         public void test_symmetricEncryptionAndDecrpytion() throws IOException {
 
             when(env.reader.readLine())
-                .thenReturn("y") // key gen
+                .thenReturn("y") // key generator
                 .thenReturn("e") // mode choice: encrypt
                 .thenReturn(SECRET_KEY_HEX) // secret key input
                 .thenReturn(CLEARTEXT) // message input

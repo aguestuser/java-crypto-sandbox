@@ -2,7 +2,7 @@ package com.example.ui;
 
 
 import com.example.crypto.message.EncryptedMessage;
-import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.generator.ByteGenerator;
 import com.example.crypto.cypher.Cypher;
 import com.example.crypto.message.EncryptedMessageWithNonce;
 import com.example.crypto.cypher.SymmetricCypher;

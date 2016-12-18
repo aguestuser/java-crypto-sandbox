@@ -1,4 +1,4 @@
-package com.example.crypto.util;
+package com.example.crypto.generator;
 
 import org.abstractj.kalium.crypto.Random;
 import org.abstractj.kalium.keys.KeyPair;

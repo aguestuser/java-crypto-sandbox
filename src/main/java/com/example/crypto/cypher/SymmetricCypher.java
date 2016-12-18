@@ -1,7 +1,7 @@
 package com.example.crypto.cypher;
 
 import com.example.crypto.message.EncryptedMessage;
-import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.generator.ByteGenerator;
 import com.example.crypto.message.EncryptedMessageWithNonce;
 import org.abstractj.kalium.crypto.SecretBox;
 

@@ -23,8 +23,7 @@ public class EncryptedMessageWithRoutingInfo extends EncryptedMessage {
 
         EncryptedMessageWithRoutingInfo that = (EncryptedMessageWithRoutingInfo) o;
 
-        if (!timestamp.equals(that.timestamp)) return false;
-        return hmac.equals(that.hmac);
+        return timestamp.equals(that.timestamp) && hmac.equals(that.hmac);
     }
 
     @Override

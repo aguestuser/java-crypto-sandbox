@@ -1,6 +1,6 @@
 package com.example.crypto.cypher;
 
-import com.example.crypto.util.ByteGenerator;
+import com.example.crypto.generator.ByteGenerator;
 import org.junit.Test;
 
 import static org.abstractj.kalium.encoders.Encoder.HEX;
